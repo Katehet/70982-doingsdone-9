@@ -121,18 +121,15 @@ $tasks = [
                 </div>
 
                 <table class="tasks">
-                <?php 
-                $tasks_count = count($tasks);
-                $curr_count = 0;
-                while ($curr_count < $tasks_count): ?>
-                    <?php if (0 == $show_complete_tasks && $tasks[$curr_count]["status"] == "Да") : continue; ?>
-                    
+                
+                <?php foreach ($tasks as $key => $value): ?>
+                    <?php if ($show_complete_tasks == 0 && $value["status"] == "Да"): continue; ?>
                     <?php else: ?>
-                    <tr class="tasks__item task <?php if ($tasks[$curr_count]["status"] == "Да"): ?>task--completed<?php endif; ?>">
+                    <tr class="tasks__item task <?php if ($value["status"] == "Да"): ?>task--completed<?php endif; ?>">
                         <td class="task__select">
                             <label class="checkbox task__checkbox">
                                 <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
-                                <span class="checkbox__text"><?=$tasks[$curr_count]["name"]; ?></span>
+                                <span class="checkbox__text"><?=$value["name"]; ?></span>
                             </label>
                         </td>
 
@@ -141,8 +138,7 @@ $tasks = [
                         <td class="task__date"></td>
                     </tr>
                     <?php endif; ?>
-                <?php $curr_count++; ?>
-                <?php endwhile; ?>
+                <?php endforeach; ?>
 
                     <!--показывать следующий тег <tr/>, если переменная $show_complete_tasks равна единице-->
                     <?php if ($show_complete_tasks == 1): ?>
