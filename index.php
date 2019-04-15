@@ -114,27 +114,36 @@ $tasks = [
                     </nav>
 
                     <label class="checkbox">
-                        <!--добавить сюда аттрибут "checked", если переменная $show_complete_tasks равна единице-->
+                        <!--добавить сюда атрибут "checked", если переменная $show_complete_tasks равна единице-->
                         <input class="checkbox__input visually-hidden show_completed" type="checkbox"<?php if ($show_complete_tasks == 1): ?>checked<?php endif ?>>
                         <span class="checkbox__text">Показывать выполненные</span>
                     </label>
                 </div>
 
                 <table class="tasks">
-                    <tr class="tasks__item task">
+                <?php 
+                $tasks_count = count($tasks);
+                $curr_count = 0;
+                while ($curr_count < $tasks_count): ?>
+                    <?php if (0 == $show_complete_tasks && $tasks[$curr_count]["status"] == "Да") : continue; ?>
+                    
+                    <?php else: ?>
+                    <tr class="tasks__item task <?php if ($tasks[$curr_count]["status"] == "Да"): ?>task--completed<?php endif; ?>">
                         <td class="task__select">
                             <label class="checkbox task__checkbox">
                                 <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
-                                <span class="checkbox__text">Сделать главную страницу Дела в порядке</span>
+                                <span class="checkbox__text"><?=$tasks[$curr_count]["name"]; ?></span>
                             </label>
                         </td>
 
-                        <td class="task__file">
-                            <a class="download-link" href="#">Home.psd</a>
-                        </td>
+                        <td class="task__file"></td>
 
                         <td class="task__date"></td>
                     </tr>
+                    <?php endif; ?>
+                <?php $curr_count++; ?>
+                <?php endwhile; ?>
+
                     <!--показывать следующий тег <tr/>, если переменная $show_complete_tasks равна единице-->
                     <?php if ($show_complete_tasks == 1): ?>
                     <tr class="tasks__item task task--completed">
