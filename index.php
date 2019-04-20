@@ -42,6 +42,16 @@ $tasks = [
         "status" => false
     ]
 ];
+
+function get_tasks_number($arr, $name_of_project) {
+    $output = 0;
+    foreach ($arr as $key => $value) {
+            if ($value["project"] == $name_of_project) {
+                $output += 1;
+            }
+        }
+    return $output;
+}
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -86,7 +96,7 @@ $tasks = [
                     <?php foreach ($projects as $key => $val): ?>
                         <li class="main-navigation__list-item">
                             <a class="main-navigation__list-item-link" href="#"><?=$val; ?></a>
-                            <span class="main-navigation__list-item-count">0</span>
+                            <span class="main-navigation__list-item-count"><?=get_tasks_number($tasks, $val); ?></span>
                         </li>
                     <?php endforeach; ?>
                     </ul>
