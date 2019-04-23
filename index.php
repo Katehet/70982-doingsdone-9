@@ -9,7 +9,7 @@ $projects = ["Входящие", "Учеба", "Работа", "Домашние
 $tasks = [
     [
         "name" => "Собеседование в IT компании",
-        "date" => "01.12.2018",
+        "date" => "01.12.2019",
         "project" => "Работа",
         "status" => false
     ],
@@ -53,9 +53,22 @@ function get_tasks_number($arr, $name_of_project) {
             }
         }
     return $output;
-}
+};
 
 $page_content = include_template("index.php", ["projects" => $projects, "tasks" => $tasks, "show_complete_tasks" => $show_complete_tasks]);
 $layout_content = include_template("layout.php", ["main_content" => $page_content, "title" => "Дела в порядке", "projects" => $projects, "tasks" => $tasks]);
 print($layout_content);
+
+date_default_timezone_set('Europe/Moscow');
+
+function time_is_up($value) {
+    $date_now = time();
+    $task_date = strtotime($value["date"]);
+    $diff_in_hours = floor(($task_date - $date_now) / 3600);
+
+    if ($diff_in_hours < 24) {
+        return true;
+    }
+    return false;
+}
 ?>
