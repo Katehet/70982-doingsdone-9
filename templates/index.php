@@ -26,7 +26,7 @@
 <?php foreach ($tasks as $key => $value): ?>
     <?php if (!(!$show_complete_tasks && $value["status"])): ?>
 
-    <tr class="tasks__item task <?php if ($value["status"]): ?>task--completed<?php endif; ?>">
+<tr class="tasks__item task <?= ($value["status"]) ? "task--completed" : ""; ?> <?= (time_is_up($value)) ? "task--important" : ""; ?>">
         <td class="task__select">
             <label class="checkbox task__checkbox">
                 <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
@@ -36,7 +36,7 @@
 
         <td class="task__file"></td>
 
-        <td class="task__date"></td>
+        <td class="task__date"><?=htmlspecialchars($value["date"]); ?></td>
     </tr>
     <?php endif; ?>
 
