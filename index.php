@@ -66,7 +66,7 @@ function time_is_up($value) {
     $task_date = strtotime($value["date"]);
     $diff_in_hours = floor(($task_date - $date_now) / 3600);
 
-    if ($diff_in_hours < 24 && $task_date != "") {
+    if ($diff_in_hours < 24 && $task_date != "" && !$value["status"]) {
         return true;
     }
     return false;
