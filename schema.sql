@@ -18,7 +18,7 @@ create table tasks (
 	task_status tinyint(1),
 	task_name char(128),
 	task_file char(128),
-	task_timeout date,
+	task_timeout char(64),
     user_id int,
     project_id int
 );
