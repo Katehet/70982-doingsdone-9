@@ -8,6 +8,12 @@ SET reg_date = NOW(),
     user_name = "Константин",
     user_password = "one_love";
 
+INSERT INTO users
+SET reg_date = NOW(), 
+    email = "keks@doings.mur", 
+    user_name = "Keks",
+    user_password = "miaauu";
+
 /* Заполняет таблицу projects */
 INSERT INTO projects (project_name, user_id)
 VALUES ("Входящие", "1"), ("Учеба", "1"), ("Работа", "1"), ("Домашние дела", "1"), ("Авто", "1");
