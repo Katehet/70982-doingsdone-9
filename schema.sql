@@ -1,30 +1,30 @@
-create database doingsdone
-    default character set utf8
-    default collate utf8_general_ci;
+CREATE DATABASE doingsdone
+    default CHARACTER SET utf8
+    default COLLATE utf8_general_ci;
 
-use doingsdone;
+USE doingsdone;
 
-create table users (
-	user_id int auto_increment primary key,
-	reg_date timestamp default current_timestamp,
-	email char(128) not null unique,
-	user_name char(128),
-	user_password char(64)
+CREATE TABLE users (
+	user_id INT auto_increment PRIMARY KEY,
+	reg_date TIMESTAMP default current_timestamp,
+	email CHAR(128) NOT NULL unique,
+	user_name CHAR(128),
+	user_password CHAR(64)
 );
 
-create table tasks (
-	task_id int auto_increment primary key,
-	add_date timestamp default current_timestamp,
-	task_status tinyint(1),
-	task_name char(128),
-	task_file char(128),
-	task_timeout char(64),
-    user_id int,
-    project_id int
+CREATE TABLE tasks (
+	task_id INT auto_increment PRIMARY KEY,
+	add_date TIMESTAMP default current_timestamp,
+	task_status TINYINT(1),
+	task_name CHAR(128),
+	task_file CHAR(128),
+	task_timeout TIMESTAMP,
+    user_id INT,
+    project_id INT
 );
 
-create table projects (
-	project_id int auto_increment primary key,
-	project_name char(128),
-    user_id int
+CREATE TABLE projects (
+	project_id INT auto_increment PRIMARY KEY,
+	project_name CHAR(128),
+    user_id INT
 );

@@ -53,7 +53,7 @@ SET task_name = "Встреча с другом",
 
 INSERT INTO tasks
 SET task_name = "Купить корм для кота",
-    task_timeout = "Нет",
+    task_timeout = NULL,
     user_id = "2",
     project_id = "4",
     task_status = "0",
@@ -61,7 +61,7 @@ SET task_name = "Купить корм для кота",
 
 INSERT INTO tasks
 SET task_name = "Заказать пиццу",
-    task_timeout = "Нет",
+    task_timeout = NULL,
     user_id = "1",
     project_id = "4",
     task_status = "0",
