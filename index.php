@@ -33,13 +33,13 @@ $tasks = [
     ],
     [
         "name" => "Купить корм для кота",
-        "date" => "Нет",
+        "date" => NULL,
         "project" => "Домашние дела",
         "status" => false
     ],
     [
         "name" => "Заказать пиццу",
-        "date" => "Нет",
+        "date" => NULL,
         "project" => "Домашние дела",
         "status" => false
     ]
