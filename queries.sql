@@ -16,8 +16,7 @@ SET reg_date = NOW(),
 
 /* Заполняет таблицу projects */
 INSERT INTO projects (project_name, user_id)
-VALUES ("Входящие", "1"), ("Учеба", "1"), ("Работа", "1"), ("Домашние дела", "2"), ("Авто", "1"),
-        ("Академия", "2"), ("Спорт," "2");
+VALUES ("Входящие", "1"), ("Учеба", "1"), ("Работа", "1"), ("Домашние дела", "1"), ("Авто", "1"), ("Академия", "2"), ("Спорт", "2");
 
 /* Заполняет таблицу tasks */
 INSERT INTO tasks
@@ -55,7 +54,7 @@ SET task_name = "Встреча с другом",
 INSERT INTO tasks
 SET task_name = "Купить корм для кота",
     task_timeout = NULL,
-    user_id = "2",
+    user_id = "1",
     project_id = "4",
     task_status = "0",
     add_date = NOW();
@@ -106,5 +105,5 @@ UPDATE tasks SET task_status = "1"
 WHERE task_name = "Заказать пиццу";
 
 /* обновить название задачи по её идентификатору */
-UPDATE tasks SET task_name = "Заказать такси"
-WHERE task_id = "6";
+-- UPDATE tasks SET task_name = "Заказать такси"
+-- WHERE task_id = "6";

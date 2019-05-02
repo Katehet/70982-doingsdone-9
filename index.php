@@ -1,12 +1,38 @@
 <?php
+
 require("helpers.php");
+
+//Соединение с БД
+$connect = mysqli_connect("localhost", "root", "", "doingsdone");
+if (!$connect) {
+    print("Ошибка подключения: " . mysqli_connect_error());
+}
+mysqli_set_charset($connect, "utf8");
+
+/* Получить список из всех проектов для одного пользователя */
+$query_proj = "SELECT p.project_name FROM projects p JOIN users u ON u.user_id = p.user_id WHERE u.user_id = 1";
+$result_proj = mysqli_query($connect, $query_proj);
+if (!$result_proj) {
+    $error = mysqli_error($connect);
+    print_r("Ошибка MySQL: " . $error);
+}
+$projects = mysqli_fetch_all($result_proj, MYSQLI_ASSOC);
+
+/* Получить список из всех задач для одного пользователя */
+$query_tasks = "SELECT t.task_name, t.task_timeout, p.project_name, t.task_status FROM tasks t JOIN projects p ON t.project_id = p.project_id WHERE p.user_id = 1";
+$result_tasks = mysqli_query($connect, $query_tasks);
+if (!$result_tasks) {
+    $error = mysqli_error($connect);
+    print_r("Ошибка MySQL: " . $error);
+}
+$tasks = mysqli_fetch_all($result_tasks, MYSQLI_ASSOC);
 
 // показывать или нет выполненные задачи
 $show_complete_tasks = rand(0, 1);
 
-$projects = ["Входящие", "Учеба", "Работа", "Домашние дела", "Авто"];
+$rojects = ["Входящие", "Учеба", "Работа", "Домашние дела", "Авто"];
 
-$tasks = [
+$asks = [
     [
         "name" => "Собеседование в IT компании",
         "date" => "01.12.2019",
@@ -42,13 +68,13 @@ $tasks = [
         "date" => NULL,
         "project" => "Домашние дела",
         "status" => false
-    ]
-];
-
+        ]
+    ];
+    
 function get_tasks_number($arr, $name_of_project) {
     $output = 0;
     foreach ($arr as $key => $value) {
-            if ($value["project"] == $name_of_project) {
+            if ($value["project_name"] == $name_of_project) {
                 $output += 1;
             }
         }
