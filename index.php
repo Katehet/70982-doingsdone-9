@@ -9,23 +9,22 @@ if (!$connect) {
 }
 mysqli_set_charset($connect, "utf8");
 
+// Отправляет SQL-запрос и возвращает результат
+function get_query_result($connection, $sql) {
+    $result = mysqli_query($connection, $sql);
+    if (!$result) {
+        $error = mysqli_error($connection);
+        print_r("Ошибка MySQL: " . $error);
+    }
+    return $data = mysqli_fetch_all($result, MYSQLI_ASSOC);
+}
 /* Получить список из всех проектов для одного пользователя */
 $query_proj = "SELECT p.project_name FROM projects p JOIN users u ON u.user_id = p.user_id WHERE u.user_id = 1";
-$result_proj = mysqli_query($connect, $query_proj);
-if (!$result_proj) {
-    $error = mysqli_error($connect);
-    print_r("Ошибка MySQL: " . $error);
-}
-$projects = mysqli_fetch_all($result_proj, MYSQLI_ASSOC);
+$projects = get_query_result($connect, $query_proj);
 
 /* Получить список из всех задач для одного пользователя */
 $query_tasks = "SELECT t.task_name, t.task_timeout, p.project_name, t.task_status FROM tasks t JOIN projects p ON t.project_id = p.project_id WHERE p.user_id = 1";
-$result_tasks = mysqli_query($connect, $query_tasks);
-if (!$result_tasks) {
-    $error = mysqli_error($connect);
-    print_r("Ошибка MySQL: " . $error);
-}
-$tasks = mysqli_fetch_all($result_tasks, MYSQLI_ASSOC);
+$tasks = get_query_result($connect, $query_tasks);
 
 // показывать или нет выполненные задачи
 $show_complete_tasks = rand(0, 1);
