@@ -21,7 +21,7 @@ VALUES ("Входящие", "1"), ("Учеба", "1"), ("Работа", "1"), ("
 /* Заполняет таблицу tasks */
 INSERT INTO tasks
 SET task_name = "Собеседование в IT компании",
-    task_timeout = "01.12.2019",
+    task_timeout = "2019-12-01",
     user_id = "1",
     project_id = "3",
     task_status = "0",
@@ -29,7 +29,7 @@ SET task_name = "Собеседование в IT компании",
 
 INSERT INTO tasks
 SET task_name = "Выполнить тестовое задание",
-    task_timeout = "25.12.2018",
+    task_timeout = "2018-12-25",
     user_id = "1",
     project_id = "3",
     task_status = "0",
@@ -37,7 +37,7 @@ SET task_name = "Выполнить тестовое задание",
 
 INSERT INTO tasks
 SET task_name = "Сделать задание первого раздела",
-    task_timeout = "21.12.2018",
+    task_timeout = "2018-12-21",
     user_id = "1",
     project_id = "2",
     task_status = "1",
@@ -45,7 +45,7 @@ SET task_name = "Сделать задание первого раздела",
 
 INSERT INTO tasks
 SET task_name = "Встреча с другом",
-    task_timeout = "22.12.2018",
+    task_timeout = "2018-12-22",
     user_id = "1",
     project_id = "1",
     task_status = "0",
