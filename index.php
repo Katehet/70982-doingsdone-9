@@ -29,57 +29,6 @@ $tasks = get_query_result($connect, $query_tasks);
 // показывать или нет выполненные задачи
 $show_complete_tasks = rand(0, 1);
 
-$rojects = ["Входящие", "Учеба", "Работа", "Домашние дела", "Авто"];
-
-$asks = [
-    [
-        "name" => "Собеседование в IT компании",
-        "date" => "01.12.2019",
-        "project" => "Работа",
-        "status" => false
-    ],
-    [
-        "name" => "Выполнить тестовое задание",
-        "date" => "25.12.2018",
-        "project" => "Работа",
-        "status" => false
-    ],
-    [
-        "name" => "Сделать задание первого раздела",
-        "date" => "21.12.2018",
-        "project" => "Учеба",
-        "status" => true
-    ],
-    [
-        "name" => "Встреча с другом",
-        "date" => "22.12.2018",
-        "project" => "Входящие",
-        "status" => false
-    ],
-    [
-        "name" => "Купить корм для кота",
-        "date" => NULL,
-        "project" => "Домашние дела",
-        "status" => false
-    ],
-    [
-        "name" => "Заказать пиццу",
-        "date" => NULL,
-        "project" => "Домашние дела",
-        "status" => false
-        ]
-    ];
-    
-function get_tasks_number($arr, $name_of_project) {
-    $output = 0;
-    foreach ($arr as $key => $value) {
-            if ($value["project_name"] == $name_of_project) {
-                $output += 1;
-            }
-        }
-    return $output;
-};
-
 $page_content = include_template("index.php", ["projects" => $projects, "tasks" => $tasks, "show_complete_tasks" => $show_complete_tasks]);
 $layout_content = include_template("layout.php", ["main_content" => $page_content, "title" => "Дела в порядке", "projects" => $projects, "tasks" => $tasks]);
 print($layout_content);
