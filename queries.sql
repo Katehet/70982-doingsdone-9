@@ -16,12 +16,12 @@ SET reg_date = NOW(),
 
 /* Заполняет таблицу projects */
 INSERT INTO projects (project_name, user_id)
-VALUES ("Входящие", "1"), ("Учеба", "1"), ("Работа", "1"), ("Домашние дела", "2"), ("Авто", "1");
+VALUES ("Входящие", "1"), ("Учеба", "1"), ("Работа", "1"), ("Домашние дела", "1"), ("Авто", "1"), ("Академия", "2"), ("Спорт", "2");
 
 /* Заполняет таблицу tasks */
 INSERT INTO tasks
 SET task_name = "Собеседование в IT компании",
-    task_timeout = "01.12.2019",
+    task_timeout = "2019-12-01",
     user_id = "1",
     project_id = "3",
     task_status = "0",
@@ -29,7 +29,7 @@ SET task_name = "Собеседование в IT компании",
 
 INSERT INTO tasks
 SET task_name = "Выполнить тестовое задание",
-    task_timeout = "25.12.2018",
+    task_timeout = "2018-12-25",
     user_id = "1",
     project_id = "3",
     task_status = "0",
@@ -37,7 +37,7 @@ SET task_name = "Выполнить тестовое задание",
 
 INSERT INTO tasks
 SET task_name = "Сделать задание первого раздела",
-    task_timeout = "21.12.2018",
+    task_timeout = "2018-12-21",
     user_id = "1",
     project_id = "2",
     task_status = "1",
@@ -45,7 +45,7 @@ SET task_name = "Сделать задание первого раздела",
 
 INSERT INTO tasks
 SET task_name = "Встреча с другом",
-    task_timeout = "22.12.2018",
+    task_timeout = "2018-12-22",
     user_id = "1",
     project_id = "1",
     task_status = "0",
@@ -54,7 +54,7 @@ SET task_name = "Встреча с другом",
 INSERT INTO tasks
 SET task_name = "Купить корм для кота",
     task_timeout = NULL,
-    user_id = "2",
+    user_id = "1",
     project_id = "4",
     task_status = "0",
     add_date = NOW();
@@ -64,6 +64,22 @@ SET task_name = "Заказать пиццу",
     task_timeout = NULL,
     user_id = "1",
     project_id = "4",
+    task_status = "0",
+    add_date = NOW();
+
+INSERT INTO tasks
+SET task_name = "Собеседовать енота",
+    task_timeout = "2019-12-01",
+    user_id = "2",
+    project_id = "6",
+    task_status = "0",
+    add_date = NOW();
+
+INSERT INTO tasks
+SET task_name = "Сеанс шторолазания",
+    task_timeout = NULL,
+    user_id = "2",
+    project_id = "7",
     task_status = "0",
     add_date = NOW();
 
@@ -89,5 +105,5 @@ UPDATE tasks SET task_status = "1"
 WHERE task_name = "Заказать пиццу";
 
 /* обновить название задачи по её идентификатору */
-UPDATE tasks SET task_name = "Заказать такси"
-WHERE task_id = "6";
+-- UPDATE tasks SET task_name = "Заказать такси"
+-- WHERE task_id = "6";

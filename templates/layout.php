@@ -24,7 +24,7 @@
 
                 <div class="main-header__side-item user-menu">
                     <div class="user-menu__data">
-                        <p>Константин</p>
+                        <p><?= $user_name; ?></p>
 
                         <a href="#">Выйти</a>
                     </div>
@@ -40,8 +40,8 @@
                     <ul class="main-navigation__list">
                     <?php foreach ($projects as $key => $val): ?>
                         <li class="main-navigation__list-item">
-                            <a class="main-navigation__list-item-link" href="#"><?=htmlspecialchars($val); ?></a>
-                            <span class="main-navigation__list-item-count"><?=get_tasks_number($tasks, $val); ?></span>
+                            <a class="main-navigation__list-item-link" href="#"><?=htmlspecialchars($val["project_name"]); ?></a>
+                            <span class="main-navigation__list-item-count"><?=get_tasks_number($tasks, $val["project_name"]); ?></span>
                         </li>
                     <?php endforeach; ?>
                     </ul>
