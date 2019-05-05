@@ -69,7 +69,7 @@ SET task_name = "Заказать пиццу",
 
 INSERT INTO tasks
 SET task_name = "Собеседовать енота",
-    task_timeout = "01.12.2019",
+    task_timeout = "2019-12-01",
     user_id = "2",
     project_id = "6",
     task_status = "0",
