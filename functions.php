@@ -14,7 +14,7 @@ function get_query_result($connection, $sql) {
 function get_tasks_number($arr, $name_of_project) {
     $output = 0;
     foreach ($arr as $key => $value) {
-            if ($value["project"] == $name_of_project) {
+            if ($value["project_name"] == $name_of_project) {
                 $output += 1;
             }
         }
