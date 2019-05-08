@@ -25,7 +25,7 @@ $query_tasks = "SELECT t.task_name, t.task_timeout, p.project_name, t.task_statu
 /* Получает массив всех задач пользователя (для меню проектов) */
 $all_tasks = get_query_result($connect, $query_tasks);
 
-$page_content = include_template($page, []); // $page = "add.php"
+$page_content = include_template($page, ["projects" => $projects]); // $page = "add.php"
 
 $layout_content = include_template("layout.php", ["main_content" => $page_content, "title" => $title, "user_name" => $user_name, "projects" => $projects, "tasks" => $all_tasks]);
 print($layout_content);
