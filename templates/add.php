@@ -1,6 +1,6 @@
 <h2 class="content__main-heading">Добавление задачи</h2>
 
-<form class="form" action="index.html" method="post" autocomplete="off">
+<form class="form" action="" method="post" enctype="multipart/form-data" autocomplete="off">
     <div class="form__row">
         <label class="form__label" for="name">Название <sup>*</sup></label>
 
@@ -12,7 +12,7 @@
 
         <select class="form__input form__input--select" name="project" id="project">
             <?php foreach ($projects as $key => $val): ?>
-            <option value=""><?=htmlspecialchars($val["project_name"]); ?></option>
+            <option value="<?=htmlspecialchars($val["project_name"]); ?>"><?=htmlspecialchars($val["project_name"]); ?></option>
             <?php endforeach; ?>
         </select>
     </div>
