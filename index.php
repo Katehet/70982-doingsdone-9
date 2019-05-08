@@ -33,7 +33,7 @@ $tasks_for_user = get_query_result($connect, $user_tasks);
 
 /* Подключает шаблоны страниц на основе результатов запросов в БД */
 $page_content = include_template("index.php", ["projects" => $projects, "tasks" => $tasks_in_project, "show_complete_tasks" => $show_complete_tasks]);
-$layout_content = include_template("layout.php", ["main_content" => $page_content, "title" => "Дела в порядке", "user_name" => $user_name, "projects" => $projects, "tasks" => $tasks_for_user, "project_id" => $project_id]);
+$layout_content = include_template("layout.php", ["main_content" => $page_content, "title" => ;$title, "user_name" => $user_name, "projects" => $projects, "tasks" => $tasks_for_user, "project_id" => $project_id]);
 print($layout_content);
 
 ?>
