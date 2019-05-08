@@ -29,7 +29,7 @@
 <tr class="tasks__item task <?= ($value["task_status"]) ? "task--completed" : ""; ?> <?= (time_is_up($value)) ? "task--important" : ""; ?>">
         <td class="task__select">
             <label class="checkbox task__checkbox">
-                <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
+                <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1" <?=$value["task_status"] ? "checked" : ""; ?>>
                 <span class="checkbox__text"><?=htmlspecialchars($value["task_name"]); ?></span>
             </label>
         </td>
@@ -42,19 +42,4 @@
 
 <?php endforeach; ?>
 
-    <!--показывать следующий тег <tr/>, если переменная $show_complete_tasks равна единице-->
-    <?php if ($show_complete_tasks): ?>
-    <tr class="tasks__item task task--completed">
-        <td class="task__select">
-            <label class="checkbox task__checkbox">
-                <input class="checkbox__input visually-hidden" type="checkbox" checked>
-                <span class="checkbox__text">Записаться на интенсив "Базовый PHP"</span>
-            </label>
-        </td>
-        <td class="task__date">10.10.2019</td>
-
-        <td class="task__controls">
-        </td>
-    </tr>
-    <?php endif ?>
 </table>
