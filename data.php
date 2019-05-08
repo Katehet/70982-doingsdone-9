@@ -1,7 +1,7 @@
 <?php
 
 //Переменные
-$page = "index.php"
+$page = "index.php";
 $title = "Дела в порядке";
 $user_id = 1;
 $user_name = "Константин";
