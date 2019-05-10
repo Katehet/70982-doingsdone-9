@@ -26,7 +26,7 @@
 <?php foreach ($tasks as $key => $value): ?>
     <?php if (!(!$show_complete_tasks && $value["task_status"])): ?>
 
-<tr class="tasks__item task <?= ($value["task_status"]) ? "task--completed" : ""; ?> <?= (time_is_up($value)) ? "task--important" : ""; ?>">
+    <tr class="tasks__item task <?= ($value["task_status"]) ? "task--completed" : ""; ?> <?= (time_is_up($value)) ? "task--important" : ""; ?>">
         <td class="task__select">
             <label class="checkbox task__checkbox">
                 <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1" <?=$value["task_status"] ? "checked" : ""; ?>>
