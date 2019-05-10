@@ -34,7 +34,7 @@
             </label>
         </td>
 
-        <td class="task__file"></td>
+        <td class="task__file"><a href="<?=$value["task_file"]; ?>"><?=$value["task_file"]; ?></a></td>
 
         <td class="task__date"><?=htmlspecialchars($value["task_timeout"]); ?></td>
     </tr>

@@ -14,7 +14,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     $new_task = $_POST;
 
     /* Проверка на заполнение обязательных полей */
-    $required = ["name", "project"];
+    $required = ["name", "project", "date"];
     $errors = []; // Создает массив для хранения ошибок
 
     foreach($required as $field) {
@@ -31,7 +31,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $task_link = "/uploads/" . $_FILES["file"]["name"];
 
         move_uploaded_file($tmp_name, $path . $file_name);
-        $new_task["path"] = $path;
+        // $new_task["path"] = $path;
     }
 
     /* Выводит ошибки из массива в случае их наличия */
@@ -41,16 +41,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     else {
         header("Location: /index.php"); // В случае успеха заргузки данных перенаправляет на главную
     }
+    /* Загрузка данных из формы в БД*/
+    $sql = "INSERT INTO tasks (add_date, task_status, task_name, task_file, task_timeout, user_id, project_id) VALUES (NOW(), 0, ?, ?, ?, 1, ?)";
+    $stmt = db_get_prepare_stmt($connect, $sql, [$new_task["name"], $task_link, $new_task["date"], $new_task["project"]]);
+    $res = mysqli_stmt_execute($stmt);
 }
 
 /* Подключает шаблоны страниц формы и разметки */
-$page_content = include_template($page, ["projects" => $projects,"new_task" => $new_task, "errors" => $errors]);
+$page_content = include_template($page, ["projects" => $projects,"new_task" => $new_task, $task_link, "errors" => $errors]);
 $layout_content = include_template("layout.php", ["main_content" => $page_content, "title" => $title, "user_name" => $user_name, "projects" => $projects, "tasks" => $all_tasks]);
-
-/* Загрузка данных из формы в БД*/
-$sql = "INSERT INTO tasks (add_date, task_status, task_name, task_file, task_timeout, user_id, project_id) VALUES (NOW(), 0, ?, ?, ?, 1, ?)";
-$stmt = db_get_prepare_stmt($connect, $sql, [$new_task["name"], $new_task["file"], $new_task["date"], $new_task["project"]]);
-$res = mysqli_stmt_execute($stmt);
 
 print($layout_content);
 
