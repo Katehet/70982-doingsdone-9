@@ -26,10 +26,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     /* Проверка заргузки файла и его перемещение */
     if(isset($_FILES["file"]["name"])) {
         $tmp_name = $_FILES["file"]["tmp_name"];
-        $path = __DIR__ . "\\uploads\\";
+        $file_name = $_FILES["file"]["name"];
+        $path = __DIR__ . "/uploads/";
         $task_link = "/uploads/" . $_FILES["file"]["name"];
 
-        move_uploaded_file($tmp_name, $path);
+        move_uploaded_file($tmp_name, $path . $file_name);
         $new_task["path"] = $path;
     }
 
@@ -38,7 +39,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $page_content = include_template($page, ["new_task" => $new_task, "errors" => $errors]);
     }
     else {
-        header("Location: /index.php");
+        header("Location: /index.php"); // В случае успеха заргузки данных перенаправляет на главную
     }
 }
 
@@ -53,10 +54,4 @@ $res = mysqli_stmt_execute($stmt);
 
 print($layout_content);
 
-print_r("<pre>");
-if($_SERVER["REQUEST_METHOD"] == "POST") {
-print_r($_POST);
-print_r($_FILES);
-var_dump($task_link);
-}
 ?>
