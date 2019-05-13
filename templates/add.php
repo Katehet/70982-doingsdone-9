@@ -4,11 +4,11 @@
     <div class="form__row">
         <?php $classname = isset($errors["name"]) ? "form__input--error" : "";
         $value = isset($new_task["name"]) ? $new_task["name"] : ""; ?>
-        
+
         <label class="form__label" for="name">Название <sup>*</sup></label>
 
         <input class="form__input <?=$classname; ?>" type="text" name="name" id="name" value="<?=$value; ?>" placeholder="Введите название">
-        <!-- Текст ошибки -->        
+        <!-- Текст ошибки -->
         <?php if(isset($errors)): ?>
             <p class="form__message">
             <?=$errors["name"]; ?>
@@ -18,13 +18,14 @@
 
     <div class="form__row">
         <?php $classname = isset($errors["project"]) ? "form__input--error" : ""; ?>
+        <?php $ID = isset($errors) ? $new_task["project"] : ""; ?>
 
         <label class="form__label" for="project">Проект <sup>*</sup></label>
 
         <select class="form__input form__input--select <?=$classname; ?>" name="project" id="project">
             <option value="">Выберите проект</option>
             <?php foreach ($projects as $key => $val): ?>
-            <option value="<?=htmlspecialchars($val["project_id"]); ?>"><?=htmlspecialchars($val["project_name"]); ?></option>
+            <option value="<?=htmlspecialchars($val["project_id"]); ?>" <?=($val["project_id"] == $ID) ? "selected" : "";?> ><?=htmlspecialchars($val["project_name"]); ?></option>
             <?php endforeach; ?>
         </select>
         <!-- Текст ошибки -->
@@ -69,3 +70,4 @@
         <input class="button" type="submit" name="" value="Добавить">
     </div>
 </form>
+<?php var_dump($new_task["project"]); ?>
