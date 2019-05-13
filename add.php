@@ -21,12 +21,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             $errors[$field] = "Поле должно быть заполнено";
         }
     }
-    /* Проверка формата и актуальности даты, если она указана*/
-    $today = time();
-    $task_day = strtotime( $new_task["date"]);
-    $diff = floor(($today - $task_day) / 86400);
 
     if(($new_task["date"])) {
+        /* Проверка формата и актуальности даты, если она указана*/
+        $today = time();
+        $task_day = strtotime( $new_task["date"]);
+        $diff = floor(($today - $task_day) / 86400);
+
         if(!is_date_valid($new_task["date"])) {
             $errors["date_format"] = "Введите дату в формате ГГГГ-ММ-ДД";
         }
