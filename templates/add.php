@@ -70,4 +70,3 @@
         <input class="button" type="submit" name="" value="Добавить">
     </div>
 </form>
-<?php var_dump($new_task["project"]); ?>
