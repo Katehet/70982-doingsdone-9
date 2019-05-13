@@ -30,10 +30,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         if(!is_date_valid($new_task["date"])) {
             $errors["date_format"] = "Введите дату в формате ГГГГ-ММ-ДД";
         }
-        
+
         elseif ($diff > 0) {
             $errors["date_exp"] = "Вы не можете спланировать прошлое :)";
-        }   
+        }
+    } else {
+        $new_task["date"] = NULL;
     }
 
     /* Проверка заргузки файла и его перемещение */
@@ -55,7 +57,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $sql = "INSERT INTO tasks (add_date, task_status, task_name, task_file, task_timeout, user_id, project_id) VALUES (NOW(), 0, ?, ?, ?, 1, ?)";
         $stmt = db_get_prepare_stmt($connect, $sql, [$new_task["name"], $task_link, $new_task["date"], $new_task["project"]]);
         $res = mysqli_stmt_execute($stmt);
-        
+
         header("Location: /index.php"); // В случае успеха заргузки данных перенаправляет на главную
     }
 
