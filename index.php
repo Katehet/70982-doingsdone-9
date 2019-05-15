@@ -7,7 +7,7 @@ require_once("helpers.php");
 require_once("aside.php");
 
 /*
-  При клике на название проекта нужно 
+  При клике на название проекта нужно
   выводить на главной задачи из проекта
 */
 /* Проверяет параметр запроса в ссылке элемента списка проектов */
@@ -15,9 +15,9 @@ if(isset($_GET["project_id"])) {
     $project_id = intval($_GET["project_id"]);
 
     /* Создает список проектов с id из запроса, созданных пользователем */
-    $id_pojects_list = "SELECT project_id FROM projects WHERE user_id = $user_id AND project_id = $project_id";
+    $id_pojects_list = "SELECT project_id FROM projects WHERE user_id = '$user_id' AND project_id = '$project_id'";
     $id_list = get_query_result($connect, $id_pojects_list);
-    
+
     /* Проверяет полученный массив */
     if(empty($id_list)) {
         http_response_code(404); // если проекта с id = $project_id у пользователя $user_id не существует
@@ -25,7 +25,7 @@ if(isset($_GET["project_id"])) {
     }
     else {
         /* Фильтрует список задач по id пользователя */
-        $query_tasks .= " AND p.project_id = $project_id";
+        $query_tasks .= " AND p.project_id = '$project_id'";
     }
 };
 
