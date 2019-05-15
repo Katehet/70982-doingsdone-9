@@ -49,9 +49,10 @@
             <?php endif; ?>
 
             <div class="form__row">
+            <?php $var = (isset($errors)) ? $new_user["email"] : "";?>
               <label class="form__label" for="email">E-mail <sup>*</sup></label>
 
-              <input class="form__input" type="text" name="email" id="email" value="" placeholder="Введите e-mail">
+              <input class="form__input" type="text" name="email" id="email" value="<?=$var; ?>" placeholder="Введите e-mail">
             <!-- Сообщение в случае  ошибки -->
             <?php if(isset($errors["email"])): ?>
             <p class="form__message"><?=$errors["email"]; ?></p>

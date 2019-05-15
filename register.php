@@ -29,6 +29,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
+    $email = $new_user["email"];
+    $sql_email = "SELECT email FROM users WHERE email = '$email'";
+    $res_email = get_query_result($connect, $sql_email);
+    
+    if($res_email) {
+        $errors["email"] = "Пользователь с таким адресом уже существует";
+    }
+
     /* Проверка на наличие ошибок */
     if(count($errors)) {
         /* Вывод ошибок */
