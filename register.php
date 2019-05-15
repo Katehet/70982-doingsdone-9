@@ -1,7 +1,6 @@
 <?php
 
 require_once("connection.php");
-require_once("data.php");
 require_once("functions.php");
 require_once("helpers.php");
 
@@ -32,7 +31,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $new_user["email"];
     $sql_email = "SELECT email FROM users WHERE email = '$email'";
     $res_email = get_query_result($connect, $sql_email);
-    
+
     if($res_email) {
         $errors["email"] = "Пользователь с таким адресом уже существует";
     }
