@@ -66,7 +66,7 @@
             <div class="form__row">
               <label class="form__label" for="name">Имя <sup>*</sup></label>
 
-              <input class="form__input <?=$classname?>" type="text" name="name" id="name" value="" placeholder="Введите имя">
+              <input class="form__input <?=$classname?>" type="text" name="name" id="name" value="<?=$new_user["name"]; ?>" placeholder="Введите имя">
             <!-- Сообщение в случае  ошибки -->
             <?php if(isset($errors["name"])): ?>
             <p class="form__message">Имя не введено</p>

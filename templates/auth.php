@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Document</title>
+  <title>Авторизация</title>
   <link rel="stylesheet" href="../css/normalize.css">
   <link rel="stylesheet" href="../css/style.css">
 </head>
@@ -27,9 +27,9 @@
     <div class="content">
 
       <section class="content__side">
-        <p class="content__side-info">Если у вас уже есть аккаунт, авторизуйтесь на сайте</p>
+        <p class="content__side-info">Если у вас еще нет аккаунта, зарегистрируйтесь на сайте</p>
 
-        <a class="button button--transparent content__side-button" href="auth.php">Войти</a>
+        <a class="button button--transparent content__side-button" href="register.php">Зарегистрироваться</a>
       </section>
 
       <main class="content__main">
@@ -37,16 +37,17 @@
 
         <form class="form" action="auth.php" method="post" autocomplete="off">
 
-          <?php $classname = isset($errors["name"]) ? "form__input--error" : ""; ?>
-          <?php if(isset($errors)): ?>
-            <p class="error-message">Вероятно, Вы где-то ошиблись</p>
+          <?php $err_email = isset($errors["email"]) ? "form__input--error" : ""; ?>
+          <?php $err_pswrd = isset($errors["password"]) ? "form__input--error" : ""; ?>
+          <?php if($errors): ?>
+            <p class="error-message">Вероятно, Вы где-то ошиблись...</p>
           <?php endif; ?>
 
           <div class="form__row">
-          <?php $var = (isset($errors)) ? $new_user["email"] : "";?>
+          <?php $var = (isset($errors)) ? $user["email"] : "";?>
             <label class="form__label" for="email">E-mail <sup>*</sup></label>
 
-            <input class="form__input <?=$classname?>" type="text" name="email" id="email" value="" placeholder="Введите e-mail">
+            <input class="form__input <?=$err_email; ?>" type="text" name="email" id="email" value="<?=$var; ?>" placeholder="Введите e-mail">
             <!-- Сообщение в случае  ошибки -->
             <?php if(isset($errors["email"])): ?>
             <p class="form__message"><?=$errors["email"]; ?></p>
@@ -56,7 +57,7 @@
           <div class="form__row">
             <label class="form__label" for="password">Пароль <sup>*</sup></label>
 
-            <input class="form__input <?=$classname?>" type="password" name="password" id="password" value="" placeholder="Введите пароль">
+            <input class="form__input <?=$err_pswrd; ?>" type="password" name="password" id="password" value="" placeholder="Введите пароль">
             <!-- Сообщение в случае  ошибки -->
             <?php if(isset($errors["password"])): ?>
             <p class="form__message"><?=$errors["password"]; ?></p>
