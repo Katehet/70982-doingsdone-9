@@ -3,8 +3,8 @@
 //Переменные
 $page = "index.php";
 $title = "Дела в порядке";
-$user_id = 1;
-$user_name = "Константин";
+$user_id = $_SESSION["ID"];
+$user_name = $_SESSION["user"];;
 
 // Показывать или нет выполненные задачи
 $show_complete_tasks = rand(0, 1);

@@ -13,37 +13,31 @@
 
   <div class="page-wrapper">
     <div class="container container--with-sidebar">
+
       <header class="main-header">
-        <a href="#">
+        <a href="/">
           <img src="../img/logo.png" width="153" height="42" alt="Логитип Дела в порядке">
         </a>
 
         <div class="main-header__side">
-          <a class="main-header__side-item button button--transparent" href="form-authorization.html">Войти</a>
+          <a class="main-header__side-item button button--transparent" href="auth.php">Войти</a>
         </div>
       </header>
 
       <div class="content">
+
         <section class="content__side">
           <p class="content__side-info">Если у вас уже есть аккаунт, авторизуйтесь на сайте</p>
 
-          <a class="button button--transparent content__side-button" href="form-authorization.html">Войти</a>
-        <?php
-        print_r("<pre>");
-        print_r("new_user: ");
-        print_r($new_user);
-        print_r("\$_POST: ");
-        print_r($_POST);
-        print_r("errors: ");
-        print_r($errors);
-        print_r("</pre>");
-        ?>
+          <a class="button button--transparent content__side-button" href="auth.php">Войти</a>
         </section>
+
         <main class="content__main">
           <h2 class="content__main-heading">Регистрация аккаунта</h2>
 
           <form class="form" action="register.php" method="post" autocomplete="off">
 
+            <?php $classname = isset($errors["name"]) ? "form__input--error" : ""; ?>
             <?php if(isset($errors)): ?>
               <p class="error-message">Пожалуйста, исправьте ошибки в форме</p>
             <?php endif; ?>
@@ -52,7 +46,7 @@
             <?php $var = (isset($errors)) ? $new_user["email"] : "";?>
               <label class="form__label" for="email">E-mail <sup>*</sup></label>
 
-              <input class="form__input" type="text" name="email" id="email" value="<?=$var; ?>" placeholder="Введите e-mail">
+              <input class="form__input <?=$classname?>" type="text" name="email" id="email" value="<?=$var; ?>" placeholder="Введите e-mail">
             <!-- Сообщение в случае  ошибки -->
             <?php if(isset($errors["email"])): ?>
             <p class="form__message"><?=$errors["email"]; ?></p>
@@ -62,7 +56,7 @@
             <div class="form__row">
               <label class="form__label" for="password">Пароль <sup>*</sup></label>
 
-              <input class="form__input" type="password" name="password" id="password" value="" placeholder="Введите пароль">
+              <input class="form__input <?=$classname?>" type="password" name="password" id="password" value="" placeholder="Введите пароль">
             <!-- Сообщение в случае  ошибки -->
             <?php if(isset($errors["password"])): ?>
             <p class="form__message">Пароль не введён</p>
@@ -72,7 +66,7 @@
             <div class="form__row">
               <label class="form__label" for="name">Имя <sup>*</sup></label>
 
-              <input class="form__input" type="text" name="name" id="name" value="" placeholder="Введите имя">
+              <input class="form__input <?=$classname?>" type="text" name="name" id="name" value="<?=$new_user["name"]; ?>" placeholder="Введите имя">
             <!-- Сообщение в случае  ошибки -->
             <?php if(isset($errors["name"])): ?>
             <p class="form__message">Имя не введено</p>

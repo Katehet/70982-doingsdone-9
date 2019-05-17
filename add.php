@@ -1,4 +1,6 @@
 <?php
+session_start();
+if(isset($_SESSION["user"])) {
 
 require_once("data.php");
 require_once("connection.php");
@@ -70,4 +72,5 @@ $layout_content = include_template("layout.php", ["main_content" => $page_conten
 
 print($layout_content);
 
+} else header("Location: /guest.php");
 ?>
