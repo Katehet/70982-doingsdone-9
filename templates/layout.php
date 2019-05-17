@@ -54,8 +54,13 @@
                     </ul>
                 </nav>
 
+                <?php if($page): ?>
+                <a class="button button--transparent content__side-button"
+                   href="/">Посмотреть все</a>
+                <?php else: ?>
                 <a class="button button--transparent button--plus content__side-button"
-                   href="pages/form-project.html" target="project_add">Добавить проект</a>
+                   href="add-project.php">Добавить проект</a>
+                <?php endif; ?>
             </section>
             <main class="content__main"><?=$main_content; ?></main>
             <?php endif; ?>

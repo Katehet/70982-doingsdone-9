@@ -46,10 +46,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $tmp_name = $_FILES["file"]["tmp_name"];
         $file_name = $_FILES["file"]["name"];
         $path = __DIR__ . "/uploads/";
-        $task_link = "/uploads/" . $_FILES["file"]["name"];
+        $task_link = $_FILES["file"]["name"];
 
         move_uploaded_file($tmp_name, $path . $file_name);
-    }
+    } else $path = NULL;
 
     /* Выводит ошибки из массива в случае их наличия */
     if(count($errors)) {
