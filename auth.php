@@ -23,37 +23,50 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     /* Проверка корректного ввода email */
     foreach ($_POST as $key => $value) {
         if ($key == "email") {
-            if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
+            if (!filter_var($value, FILTER_VALIDATE_EMAIL) && ($value != "")) {
                 $errors[$key] = "E-mail должен быть корректным";
             }
         }
     }
 
-    function get_query_row($connection, $sql) {
-        $result = mysqli_query($connection, $sql);
-        if (!$result) {
-            $error = mysqli_error($connection);
-            print_r("Ошибка MySQL: " . $error);
-        }
-        return $data = mysqli_fetch_assoc($result);
-    };
-
-    // new data
+    // Данные от пользователя
     $email = $user["email"];
     $pswrd =$user["password"];
-    $hash = password_hash($pswrd, PASSWORD_DEFAULT);
 
-    /* Поиск e-mail и пароля в БД */
-    $sql_email = "SELECT email, user_password FROM users WHERE email = '$email'";
+    /* Поиск записей в БД по введённому e-mail  */
+    $sql_email = "SELECT email, user_password, user_name, user_id FROM users WHERE email = '$email'";
     $res_user = get_query_row($connect, $sql_email);
-    $pass = $res_user["user_password"];
+    
+    /* Проверка выполнения запроса e-mail */
+    if($res_user) {
+        $pass = $res_user["user_password"];
+        
+        /* Сверка паролей */
+        if(password_verify($pswrd, $pass)) {
+            /* Старт новой сессии и редирект в случае успеха сверки паролей*/
+            session_start();
+            $_SESSION["user"] = $res_user["user_name"];
+            $_SESSION["email"] = $res_user["email"];
+            $_SESSION["ID"] = $res_user["user_id"];
+            header("Location: /index.php");
 
-    var_dump(password_verify($hash, $pass));
+          /* Запись ошибки, если пароль неверный */
+        } else $errors["password"] = "Пароль неверный!";
+       
+      /* Запись ошибки, если e-mail корректен, но не найден в БД */      
+    } elseif(filter_var($email, FILTER_VALIDATE_EMAIL) && ($email != "")) {
+        $errors["email"] = "E-mail не найден";
+    }
+
+    /* Проверка на наличие ошибок */
+    if(count($errors)) {
+        $page_content = include_template($page, ["user" => $user, "errors" => $errors]);
+    }
 
 }
 
 /* Подключает шаблоны страниц на основе результатов запросов в БД */
-$page_content = include_template($page, ["user" => $user, "errors" => $errors, "res_user" => $res_user]);
+$page_content = include_template($page, ["user" => $user, "errors" => $errors]);
 
 print($page_content);
 

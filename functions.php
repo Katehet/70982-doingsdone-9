@@ -1,6 +1,9 @@
 <?php
 
-//Отправляет SQL-запрос и возвращает результат
+/*
+    Отправляет SQL-запрос и возвращает результат 
+    в виде ассоциативного массива
+*/
 function get_query_result($connection, $sql) {
     $result = mysqli_query($connection, $sql);
     if (!$result) {
@@ -8,6 +11,19 @@ function get_query_result($connection, $sql) {
         print_r("Ошибка MySQL: " . $error);
     }
     return $data = mysqli_fetch_all($result, MYSQLI_ASSOC);
+};
+
+/*
+    Отправляет SQL-запрос и возвращает результат 
+    в виде одномерного массива
+*/
+function get_query_row($connection, $sql) {
+    $result = mysqli_query($connection, $sql);
+    if (!$result) {
+        $error = mysqli_error($connection);
+        print_r("Ошибка MySQL: " . $error);
+    }
+    return $data = mysqli_fetch_assoc($result);
 };
 
 //Получает количество задач в проекте

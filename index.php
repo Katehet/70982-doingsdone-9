@@ -1,9 +1,10 @@
 <?php
 
+session_start();
 if(isset($_SESSION["user"])) {
 
 require_once("connection.php");
-// require_once("data.php");
+require_once("data.php");
 require_once("functions.php");
 require_once("helpers.php");
 require_once("aside.php");

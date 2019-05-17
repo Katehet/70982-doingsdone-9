@@ -57,7 +57,7 @@
                 <a class="button button--transparent button--plus content__side-button"
                    href="pages/form-project.html" target="project_add">Добавить проект</a>
             </section>
-            <main class="content__main"><?=$page_content; ?></main>
+            <main class="content__main"><?=$main_content; ?></main>
             <?php endif; ?>
             <?=$guest_page; ?>
         </div>
