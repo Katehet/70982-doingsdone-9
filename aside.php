@@ -9,7 +9,7 @@ $query_proj = "SELECT p.project_id, p.project_name FROM projects p
 $projects = get_query_result($connect, $query_proj);
 
 /* Получает список из всех задач для одного пользователя */
-$query_tasks = "SELECT t.task_name, t.task_timeout, p.project_name, t.task_status, t.task_file FROM tasks t
+$query_tasks = "SELECT t.task_name, t.task_timeout, p.project_name, t.task_status, t.task_file, t.task_id FROM tasks t
                 JOIN projects p
                 ON t.project_id = p.project_id
                 WHERE p.user_id = '$user_id'";

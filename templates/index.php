@@ -29,7 +29,7 @@
     <tr class="tasks__item task <?= ($value["task_status"]) ? "task--completed" : ""; ?> <?= (time_is_up($value)) ? "task--important" : ""; ?>">
         <td class="task__select">
             <label class="checkbox task__checkbox">
-                <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1" <?=$value["task_status"] ? "checked" : ""; ?>>
+                <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="<?=$value["task_id"]; ?>" <?=$value["task_status"] ? "checked" : ""; ?>>
                 <span class="checkbox__text"><?=htmlspecialchars($value["task_name"]); ?></span>
             </label>
         </td>
