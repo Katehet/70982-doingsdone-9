@@ -10,8 +10,44 @@ require_once("helpers.php");
 require_once("aside.php");
 
 /*
-  При клике на название проекта нужно
-  выводить на главной задачи из проекта
+Фильтр задач
+*/
+/* По запросу формирует соответствующий список задач */
+if(isset($_GET["tab"])) {
+    $tab = $_GET["tab"];
+    switch($tab) {
+        case "today":
+            $tab = " = CURRENT_DATE";
+            break;
+            case "tomorrow":
+            $tab = " = DATE_ADD(CURRENT_DATE, INTERVAL 1 DAY)";
+            break;
+            case "expired":
+            $tab = " < CURRENT_DATE";
+            break;
+    }
+    $query_tasks .= " AND t.task_timeout" . "$tab";
+}
+
+/*
+Отмечать задачи как выполненные
+*/
+/* По запросу  и переданному id обновляет статус задачи */
+if(isset($_GET["check"])) {
+    $checked = $_GET["check"];
+    $task_id = $_GET["task_id"];
+    $update_status = "UPDATE tasks SET task_status = '$checked' WHERE task_id = '$task_id'";
+    
+    $result = mysqli_query($connect, $update_status);
+    if (!$result) {
+        $error = mysqli_error($connect);
+        print_r("Ошибка MySQL: " . $error);
+    }
+}
+
+/*
+При клике на название проекта нужно
+выводить на главной задачи из проекта
 */
 /* Проверяет параметр запроса в ссылке элемента списка проектов */
 if(isset($_GET["project_id"])) {

@@ -8,10 +8,10 @@
 
 <div class="tasks-controls">
     <nav class="tasks-switch">
-        <a href="/" class="tasks-switch__item tasks-switch__item--active">Все задачи</a>
-        <a href="/" class="tasks-switch__item">Повестка дня</a>
-        <a href="/" class="tasks-switch__item">Завтра</a>
-        <a href="/" class="tasks-switch__item">Просроченные</a>
+        <a href="index.php" class="tasks-switch__item tasks-switch__item--active">Все задачи</a>
+        <a href="index.php?tab=today" class="tasks-switch__item">Повестка дня</a>
+        <a href="index.php?tab=tomorrow" class="tasks-switch__item">Завтра</a>
+        <a href="index.php?tab=expired" class="tasks-switch__item">Просроченные</a>
     </nav>
 
     <label class="checkbox">
@@ -29,12 +29,12 @@
     <tr class="tasks__item task <?= ($value["task_status"]) ? "task--completed" : ""; ?> <?= (time_is_up($value)) ? "task--important" : ""; ?>">
         <td class="task__select">
             <label class="checkbox task__checkbox">
-                <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1" <?=$value["task_status"] ? "checked" : ""; ?>>
+                <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="<?=$value["task_id"]; ?>" <?=$value["task_status"] ? "checked" : ""; ?>>
                 <span class="checkbox__text"><?=htmlspecialchars($value["task_name"]); ?></span>
             </label>
         </td>
 
-        <td class="task__file"><a href="<?=$value["task_file"]; ?>"><?=$value["task_file"]; ?></a></td>
+        <td class="task__file"><a href="uploads/<?=$value["task_file"]; ?>"><?=$value["task_file"]; ?></a></td>
 
         <td class="task__date"><?=htmlspecialchars($value["task_timeout"]); ?></td>
     </tr>
