@@ -10,6 +10,26 @@ require_once("helpers.php");
 require_once("aside.php");
 
 /*
+Фильтр задач
+*/
+/* По запросу формирует соответствующий список задач */
+if(isset($_GET["tab"])) {
+    $tab = $_GET["tab"];
+    switch($tab) {
+        case "today":
+            $tab = " = CURRENT_DATE";
+            break;
+            case "tomorrow":
+            $tab = " = DATE_ADD(CURRENT_DATE, INTERVAL 1 DAY)";
+            break;
+            case "expired":
+            $tab = " < CURRENT_DATE";
+            break;
+    }
+    $query_tasks .= " AND t.task_timeout" . "$tab";
+}
+
+/*
 Отмечать задачи как выполненные
 */
 /* По запросу  и переданному id обновляет статус задачи */
