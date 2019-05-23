@@ -28,3 +28,5 @@ CREATE TABLE projects (
 	project_name CHAR(128),
     user_id INT
 );
+
+CREATE FULLTEXT INDEX ft_search ON tasks(task_name);
