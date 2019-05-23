@@ -71,6 +71,22 @@ if(isset($_GET["project_id"])) {
 /* Получает массив задач для вывода на главной */
 $tasks = get_query_result($connect, $query_tasks);
 
+/*
+Поиск по задачам
+*/
+/* Выполняет поиск задачи по названию */
+$search = $_GET["search"] ?? "";
+
+if($search) {
+    $sql = $query_tasks . " AND MATCH(task_name) AGAINST(?)";
+
+    $stmt = db_get_prepare_stmt($connect, $sql, [$search]);
+    mysqli_stmt_execute($stmt);
+    $res = mysqli_stmt_get_result($stmt);
+
+    $tasks = mysqli_fetch_all($res, MYSQLI_ASSOC);
+};
+
 /* Подключает шаблоны страниц на основе результатов запросов в БД */
 $page_content = include_template($page, ["projects" => $projects, "tasks" => $tasks, "show_complete_tasks" => $show_complete_tasks]);
 $layout_content = include_template("layout.php", ["main_content" => $page_content, "title" => $title, "user_name" => $user_name, "project_id" => $project_id, "projects" => $projects, "tasks" => $all_tasks]);
