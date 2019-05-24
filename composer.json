@@ -1,0 +1,13 @@
+{
+    "name": "sergey/doingsdone",
+    "description": "PHP training project",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Katehet",
+            "email": "sv_sleep@mail.ru"
+        }
+    ],
+    "require": {}
+}
