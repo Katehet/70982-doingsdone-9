@@ -9,5 +9,7 @@
             "email": "sv_sleep@mail.ru"
         }
     ],
-    "require": {}
+    "require": {
+        "swiftmailer/swiftmailer": "^6.2"
+    }
 }

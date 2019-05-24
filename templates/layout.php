@@ -60,6 +60,8 @@
                 <?php else: ?>
                 <a class="button button--transparent button--plus content__side-button"
                    href="add-project.php">Добавить проект</a>
+                <a class="button button--transparent button--plus content__side-button"
+                   href="notify.php" style="margin-top:2em">Отправить рассылку</a>
                 <?php endif; ?>
             </section>
             <main class="content__main"><?=$main_content; ?></main>
