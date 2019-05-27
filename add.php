@@ -13,6 +13,7 @@ $page = "add.php";
 /* Проверка отправки данных из формы */
 if($_SERVER["REQUEST_METHOD"] == "POST") {
     $new_task = $_POST;
+    $new_task["user_id"] = $_SESSION["ID"];
 
     /* Проверка на заполнение обязательных полей */
     $required = ["name", "project"];
@@ -57,8 +58,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     else {
         /* Загрузка данных из формы в БД*/
-        $sql = "INSERT INTO tasks (add_date, task_status, task_name, task_file, task_timeout, user_id, project_id) VALUES (NOW(), 0, ?, ?, ?, 1, ?)";
-        $stmt = db_get_prepare_stmt($connect, $sql, [$new_task["name"], $task_link, $new_task["date"], $new_task["project"]]);
+        $sql = "INSERT INTO tasks (add_date, task_status, task_name, task_file, task_timeout, user_id, project_id) VALUES (NOW(), 0, ?, ?, ?, ?, ?)";
+        $stmt = db_get_prepare_stmt($connect, $sql, [$new_task["name"], $task_link, $new_task["date"], $new_task["user_id"], $new_task["project"]]);
         $res = mysqli_stmt_execute($stmt);
 
         header("Location: /index.php"); // В случае успеха заргузки данных перенаправляет на главную

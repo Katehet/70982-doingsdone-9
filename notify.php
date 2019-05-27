@@ -13,7 +13,10 @@ $transport->setPassword("htmlacademy");
 $mailer = new Swift_Mailer($transport);
 
 /* Формирование сообщения */
-$sql = "SELECT task_name, task_timeout FROM tasks WHERE task_status = '0' AND task_timeout = CURDATE() ORDER BY add_date";
+$sql = "SELECT task_name, task_timeout, u.email, u.user_name FROM tasks t
+        JOIN users u ON t.user_id = u.user_id 
+        WHERE t.task_status = '0' AND t.task_timeout = CURDATE() 
+        ORDER BY t.add_date";
 
 $res = mysqli_query($connect, $sql);
 
@@ -26,22 +29,27 @@ if($res && mysqli_num_rows($res)) {
         $users = mysqli_fetch_all($res, MYSQLI_ASSOC);
         $recipients = [];
 
-        foreach ($users as $key => $user) {
+        /* Получение списка пользователей с email */
+        foreach ($users as $user) {
             $recipients[$user["email"]] = $user["user_name"];
         }
-
-
-        $message = new Swift_Message();
-        $message->setSubject("Уведомление от сервиса «Дела в порядке»");
-        $message->setFrom(["keks@phpdemo.ru"=> "Дела в порядке"]);
-        $message->setBcc($recipients);
-
-        $msg_content = "Уважаемый пользователь! У вас запланирована задача на сегодня";
-        $message->setBody($msg_content, "text/plain");
-
-        /* Отправка сообщения */
-        $result = $mailer->send($message);
-
+        
+        foreach ($task_list as $key => $value) {
+            $name = $value['user_name'];
+            $task = $value['task_name'];
+            $time = $value['task_timeout'];
+                        
+            $message = new Swift_Message();
+            $message->setSubject("Уведомление от сервиса «Дела в порядке»");
+            $message->setFrom(["keks@phpdemo.ru"=> "Дела в порядке"]);
+            $message->setBcc($recipients);
+            
+            $msg_content = "Уважаемый $name! У вас запланирована задача '$task' на $time";
+            $message->setBody($msg_content, "text/plain");
+            
+            /* Отправка сообщения */
+            $result = $mailer->send($message);
+        }
 
         if($result) {
             print("Рассылка успешно отправлена!");
