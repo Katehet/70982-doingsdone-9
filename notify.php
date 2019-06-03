@@ -31,7 +31,7 @@ if($res && mysqli_num_rows($res)) {
         if($res && mysqli_num_rows($res)) {
             $task_list = mysqli_fetch_all($res, MYSQLI_ASSOC);
 
-            $msg = "<br><br>Уважаемый " . $user['user_name'] . "! У Вас запланированы следующие задачи: ";
+            $msg = "Уважаемый(-ая) " . $user['user_name'] . "! У Вас запланированы следующие задачи: ";
             foreach ($task_list as $key => $value) {
                 $msg .= "<br>- " . $value['task_name']. " на " . $value['task_timeout'];
             }

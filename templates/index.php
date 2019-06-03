@@ -1,17 +1,17 @@
 <h2 class="content__main-heading">Список задач</h2>
 
-<form class="search-form" action="index.php" method="post" autocomplete="off">
-    <input class="search-form__input" type="text" name="" value="<?=($_GET["search"]) ?? ""; ?>" placeholder="Поиск по задачам">
+<form class="search-form" action="index.php" method="GET" autocomplete="off">
+    <input class="search-form__input" type="text" name="search" value="<?=($_GET["search"]) ?? ""; ?>" placeholder="Поиск по задачам">
 
     <input class="search-form__submit" type="submit" name="" value="Искать">
 </form>
 
 <div class="tasks-controls">
     <nav class="tasks-switch">
-        <a href="index.php" class="tasks-switch__item tasks-switch__item--active">Все задачи</a>
-        <a href="index.php?tab=today" class="tasks-switch__item">Повестка дня</a>
-        <a href="index.php?tab=tomorrow" class="tasks-switch__item">Завтра</a>
-        <a href="index.php?tab=expired" class="tasks-switch__item">Просроченные</a>
+        <a href="index.php" class="tasks-switch__item <?=!($_GET["tab"]) ? "tasks-switch__item--active" : "" ; ?>">Все задачи</a>
+        <a href="index.php?tab=today" class="tasks-switch__item <?=($_GET["tab"] == "today") ? "tasks-switch__item--active" : "" ; ?>">Повестка дня</a>
+        <a href="index.php?tab=tomorrow" class="tasks-switch__item <?=($_GET["tab"] == "tomorrow") ? "tasks-switch__item--active" : "" ; ?>">Завтра</a>
+        <a href="index.php?tab=expired" class="tasks-switch__item <?=($_GET["tab"] == "expired") ? "tasks-switch__item--active" : "" ; ?>">Просроченные</a>
     </nav>
 
     <label class="checkbox">

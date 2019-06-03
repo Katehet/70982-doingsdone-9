@@ -80,6 +80,7 @@ $tasks = get_query_result($connect, $query_tasks);
 $search = $_GET["search"] ?? "";
 
 if($search) {
+    $search = trim($search);
     $sql = $query_tasks . " AND MATCH(task_name) AGAINST(?)";
 
     $stmt = db_get_prepare_stmt($connect, $sql, [$search]);
