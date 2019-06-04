@@ -1,3 +1,4 @@
+
 <h2 class="content__main-heading">Список задач</h2>
 
 <form class="search-form" action="index.php" method="GET" autocomplete="off">
@@ -7,11 +8,17 @@
 </form>
 
 <div class="tasks-controls">
+<?php
+$params = $_GET;
+$page = pathinfo(__FILE__, PATHINFO_BASENAME);
+$query = http_build_query($params);
+$url = "/" . $page . "?" . $query;
+?>
     <nav class="tasks-switch">
         <a href="index.php" class="tasks-switch__item <?=!($_GET["tab"]) ? "tasks-switch__item--active" : "" ; ?>">Все задачи</a>
-        <a href="index.php?tab=today" class="tasks-switch__item <?=($_GET["tab"] == "today") ? "tasks-switch__item--active" : "" ; ?>">Повестка дня</a>
-        <a href="index.php?tab=tomorrow" class="tasks-switch__item <?=($_GET["tab"] == "tomorrow") ? "tasks-switch__item--active" : "" ; ?>">Завтра</a>
-        <a href="index.php?tab=expired" class="tasks-switch__item <?=($_GET["tab"] == "expired") ? "tasks-switch__item--active" : "" ; ?>">Просроченные</a>
+        <a href="<?=$url . "&tab=today"; ?>" class="tasks-switch__item <?=($_GET["tab"] == "today") ? "tasks-switch__item--active" : "" ; ?>">Повестка дня</a>
+        <a href="<?=$url . "&tab=tomorrow"; ?>" class="tasks-switch__item <?=($_GET["tab"] == "tomorrow") ? "tasks-switch__item--active" : "" ; ?>">Завтра</a>
+        <a href="<?=$url . "&tab=expired"; ?>" class="tasks-switch__item <?=($_GET["tab"] == "expired") ? "tasks-switch__item--active" : "" ; ?>">Просроченные</a>
     </nav>
 
     <label class="checkbox">
@@ -19,6 +26,7 @@
         <input class="checkbox__input visually-hidden show_completed" type="checkbox" <?= ($show_complete_tasks == 1) ? "checked" : ""; ?>>
         <span class="checkbox__text">Показывать выполненные</span>
     </label>
+
 </div>
 
 <table class="tasks">
