@@ -37,7 +37,7 @@
 
           <form class="form" action="register.php" method="post" autocomplete="off">
 
-            <?php $classname = isset($errors["name"]) ? "form__input--error" : ""; ?>
+            <?php $classname = "form__input--error"; ?>
             <?php if(isset($errors)): ?>
               <p class="error-message">Пожалуйста, исправьте ошибки в форме</p>
             <?php endif; ?>
@@ -46,7 +46,7 @@
             <?php $var = (isset($errors)) ? $new_user["email"] : "";?>
               <label class="form__label" for="email">E-mail <sup>*</sup></label>
 
-              <input class="form__input <?=$classname?>" type="text" name="email" id="email" value="<?=$var; ?>" placeholder="Введите e-mail">
+              <input class="form__input <?=isset($errors["email"]) ? $classname : ""; ?>" type="text" name="email" id="email" value="<?=$var; ?>" placeholder="Введите e-mail">
             <!-- Сообщение в случае  ошибки -->
             <?php if(isset($errors["email"])): ?>
             <p class="form__message"><?=$errors["email"]; ?></p>
@@ -56,7 +56,7 @@
             <div class="form__row">
               <label class="form__label" for="password">Пароль <sup>*</sup></label>
 
-              <input class="form__input <?=$classname?>" type="password" name="password" id="password" value="" placeholder="Введите пароль">
+              <input class="form__input <?=isset($errors["password"]) ? $classname : ""; ?>" type="password" name="password" id="password" value="" placeholder="Введите пароль">
             <!-- Сообщение в случае  ошибки -->
             <?php if(isset($errors["password"])): ?>
             <p class="form__message">Пароль не введён</p>
@@ -66,7 +66,7 @@
             <div class="form__row">
               <label class="form__label" for="name">Имя <sup>*</sup></label>
 
-              <input class="form__input <?=$classname?>" type="text" name="name" id="name" value="<?=$new_user["name"]; ?>" placeholder="Введите имя">
+              <input class="form__input <?=isset($errors["name"]) ? $classname : ""; ?>" type="text" name="name" id="name" value="<?=$new_user["name"]; ?>" placeholder="Введите имя">
             <!-- Сообщение в случае  ошибки -->
             <?php if(isset($errors["name"])): ?>
             <p class="form__message">Имя не введено</p>

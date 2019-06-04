@@ -95,5 +95,8 @@ $page_content = include_template($page, ["projects" => $projects, "tasks" => $ta
 $layout_content = include_template("layout.php", ["main_content" => $page_content, "title" => $title, "user_name" => $user_name, "project_id" => $project_id, "projects" => $projects, "tasks" => $all_tasks]);
 print($layout_content);
 
-} else header("Location: /guest.php");
+} 
+else {
+    header("Location: /guest.php");
+}
 ?>

@@ -12,24 +12,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
     /* Проверка на заполнение обязательных полей */
     $required = ["email", "password"];
-    $errors = []; // Создает массив для хранения ошибок
+    
+    /* Массив для хранения ошибок */
+    $errors = fill_this_fields($user, $required);
 
-    foreach($required as $field) {
-        if(empty($_POST[$field])) {
-            $errors[$field] = "Поле должно быть заполнено";
-        }
-    }
-
-    /* Проверка корректного ввода email */
-    foreach ($_POST as $key => $value) {
-        if ($key == "email") {
-            if (!filter_var($value, FILTER_VALIDATE_EMAIL) && ($value != "")) {
-                $errors[$key] = "E-mail должен быть корректным";
-            }
-        }
-    }
-
-    // Данные от пользователя
+    /* Данные от пользователя */
     $email = $user["email"];
     $pswrd =$user["password"];
 
@@ -43,18 +30,21 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         
         /* Сверка паролей */
         if(password_verify($pswrd, $pass)) {
-            /* Старт новой сессии и редирект в случае успеха сверки паролей*/
+        /* Старт новой сессии и редирект в случае успеха сверки паролей*/
             session_start();
             $_SESSION["user"] = $res_user["user_name"];
             $_SESSION["email"] = $res_user["email"];
             $_SESSION["ID"] = $res_user["user_id"];
             header("Location: /index.php");
-
-          /* Запись ошибки, если пароль неверный */
-        } else $errors["password"] = "Пароль неверный!";
+        } 
+        /* Запись ошибки, если пароль неверный */
+        else {
+            $errors["password"] = "Пароль неверный!";
+        }
        
       /* Запись ошибки, если e-mail корректен, но не найден в БД */      
-    } elseif(filter_var($email, FILTER_VALIDATE_EMAIL) && ($email != "")) {
+    } 
+    elseif(filter_var($email, FILTER_VALIDATE_EMAIL) && ($email != "")) {
         $errors["email"] = "E-mail не найден";
     }
 

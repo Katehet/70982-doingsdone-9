@@ -5,33 +5,26 @@ require_once("functions.php");
 require_once("helpers.php");
 
 $page = "register.php";
-
+/* Валидация */
+/* Проверка отправки данных из формы */
 if($_SERVER["REQUEST_METHOD"] == "POST") {
     $new_user = $_POST;
 
+    /* Проверка на заполнение обязательных полей */
     $required = ["email", "password", "name"];
-    $errors = [];
 
-    /* Проверка заполнения обязательных полей */
-    foreach($required as $field) {
-        if(empty($_POST[$field])) {
-            $errors[$field] = "Поле пустое!";
-        }
-    }
+    /* Массив для хранения ошибок */
+    $errors = fill_this_fields($new_user, $required);
 
-    /* Проверка корректного ввода email */
-    foreach ($_POST as $key => $value) {
-        if ($key == "email") {
-            if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
-                $errors[$key] = "E-mail должен быть корректным";
-            }
-        }
-    }
-
+    /* Данные от пользователя */
     $email = $new_user["email"];
+
+
+    /* Поиск записей в БД по введённому e-mail  */
     $sql_email = "SELECT email FROM users WHERE email = '$email'";
     $res_email = get_query_result($connect, $sql_email);
 
+    /* Проверка выполнения запроса e-mail */
     if($res_email) {
         $errors["email"] = "Пользователь с таким адресом уже существует";
     }
