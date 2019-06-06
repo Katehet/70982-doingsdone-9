@@ -3,16 +3,16 @@ ini_set('error_reporting', E_ALL);
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 
-require_once("connection.php");
-require_once("functions.php");
-require_once("helpers.php");
+require_once "connection.php";
+require_once "functions.php";
+require_once "helpers.php";
 
 $page = "register.php";
 $new_user = [];
 $errors = [];
 /* Валидация */
 /* Проверка отправки данных из формы */
-if($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $new_user = $_POST;
 
     /* Проверка на заполнение обязательных полей */
@@ -30,16 +30,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     $res_email = get_query_result($connect, $sql_email);
 
     /* Проверка выполнения запроса e-mail */
-    if($res_email) {
+    if ($res_email) {
         $errors["email"] = "Пользователь с таким адресом уже существует";
     }
 
     /* Проверка на наличие ошибок */
-    if(count($errors)) {
+    if (count($errors)) {
         /* Вывод ошибок */
         $page_content = include_template($page, ["new_user" => $new_user, "errors" => $errors]);
-    }
-    else {
+    } else {
         /* Либо загрузка данных из формы в БД*/
         $pass_hash = password_hash($new_user["password"], PASSWORD_DEFAULT);
         $sql = "INSERT INTO users (reg_date, email, user_name, user_password) VALUES (NOW(), ?, ?, ?)";
@@ -55,4 +54,3 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 $page_content = include_template($page, ["new_user" => $new_user, "errors" => $errors]);
 
 print($page_content);
-?>

@@ -22,7 +22,7 @@
             </a>
 
             <div class="main-header__side">
-                <?php if(isset($_SESSION)): ?>
+                <?php if (isset($_SESSION)): ?>
                 <a class="main-header__side-item button button--plus open-modal" href="add.php">Добавить задачу</a>
 
                 <div class="main-header__side-item user-menu">
@@ -39,14 +39,14 @@
         </header>
 
         <div class="content">
-            <?php if(isset($_SESSION)): ?>
+            <?php if (isset($_SESSION)): ?>
             <section class="content__side">
                 <h2 class="content__side-heading">Проекты</h2>
 
                 <nav class="main-navigation">
                     <ul class="main-navigation__list">
                     <?php foreach ($projects as $key => $val): ?>
-                        <li class="main-navigation__list-item <?=($project_id == $val["project_id"]) ? "main-navigation__list-item--active" : ""; ?>">
+                        <li class="main-navigation__list-item <?=($project_id === $val["project_id"]) ? "main-navigation__list-item--active" : ""; ?>">
                             <a class="main-navigation__list-item-link" href=<?="index.php?project_id=" . $val["project_id"]; ?>><?=htmlspecialchars($val["project_name"]); ?></a>
                             <span class="main-navigation__list-item-count"><?=get_tasks_number($tasks, $val["project_name"]); ?></span>
                         </li>
@@ -72,7 +72,7 @@
 
             <p>Веб-приложение для удобного ведения списка дел.</p>
         </div>
-        <?php if(isset($_SESSION)): ?>
+        <?php if (isset($_SESSION)): ?>
         <a class="main-footer__button button button--plus" href="add.php">Добавить задачу</a>
         <?php endif; ?>
         <div class="main-footer__social social">

@@ -38,7 +38,7 @@
           <form class="form" action="register.php" method="post" autocomplete="off">
 
             <?php $classname = "form__input--error"; ?>
-            <?php if(count($errors)): ?>
+            <?php if (count($errors)): ?>
               <p class="error-message">Пожалуйста, исправьте ошибки в форме</p>
             <?php endif; ?>
 
@@ -48,7 +48,7 @@
 
               <input class="form__input <?=isset($errors["email"]) ? $classname : ""; ?>" type="text" name="email" id="email" value="<?=$var; ?>" placeholder="Введите e-mail">
             <!-- Сообщение в случае  ошибки -->
-            <?php if(isset($errors["email"])): ?>
+            <?php if (isset($errors["email"])): ?>
             <p class="form__message"><?=$errors["email"]; ?></p>
             <?php endif; ?>
             </div>
@@ -58,7 +58,7 @@
 
               <input class="form__input <?=isset($errors["password"]) ? $classname : ""; ?>" type="password" name="password" id="password" value="" placeholder="Введите пароль">
             <!-- Сообщение в случае  ошибки -->
-            <?php if(isset($errors["password"])): ?>
+            <?php if (isset($errors["password"])): ?>
             <p class="form__message">Пароль не введён</p>
             <?php endif; ?>
             </div>
@@ -68,7 +68,7 @@
 
               <input class="form__input <?=isset($errors["name"]) ? $classname : ""; ?>" type="text" name="name" id="name" value="<?=$new_user["name"] ?? ""; ?>" placeholder="Введите имя">
             <!-- Сообщение в случае  ошибки -->
-            <?php if(isset($errors["name"])): ?>
+            <?php if (isset($errors["name"])): ?>
             <p class="form__message">Имя не введено</p>
             <?php endif; ?>
             </div>

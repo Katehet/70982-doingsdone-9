@@ -4,10 +4,10 @@ ini_set('error_reporting', E_ALL);
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 
-require_once("vendor/autoload.php");
-require_once("connection.php");
-require_once("functions.php");
-require_once("helpers.php");
+require_once "vendor/autoload.php";
+require_once "connection.php";
+require_once "functions.php";
+require_once "helpers.php";
 
 /* Конфигурация транспорта */
 $transport = new Swift_SmtpTransport("phpdemo.ru", 25);
@@ -19,7 +19,7 @@ $mailer = new Swift_Mailer($transport);
 /* Формирование сообщения */
 $res = mysqli_query($connect, "SELECT email, user_id, user_name FROM users");
 
-if($res && mysqli_num_rows($res)) {
+if ($res && mysqli_num_rows($res)) {
     $users = mysqli_fetch_all($res, MYSQLI_ASSOC);
 
     /* Получение списка пользователей с email */
@@ -32,7 +32,7 @@ if($res && mysqli_num_rows($res)) {
                 WHERE user_id = " . $user['user_id'] . "
                 AND task_status = '0' AND task_timeout = CURDATE()";
         $res = mysqli_query($connect, $sql);
-        if($res && mysqli_num_rows($res)) {
+        if ($res && mysqli_num_rows($res)) {
             $task_list = mysqli_fetch_all($res, MYSQLI_ASSOC);
 
             $msg = "Уважаемый(-ая) " . $user['user_name'] . "! У Вас запланированы следующие задачи: ";
@@ -49,14 +49,11 @@ if($res && mysqli_num_rows($res)) {
             /* Отправка сообщения */
             $result = $mailer->send($message);
             
-            if($result) {
+            if ($result) {
                 print("Рассылка успешно отправлена!");
-            }
-            else {
+            } else {
                 print("Не удалось отправить рассылку.");
             }
         }
     }
 }
-
-?>

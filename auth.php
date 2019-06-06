@@ -3,16 +3,16 @@ ini_set('error_reporting', E_ALL);
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 
-require_once("connection.php");
-require_once("functions.php");
-require_once("helpers.php");
+require_once "connection.php";
+require_once "functions.php";
+require_once "helpers.php";
 
 $page = "auth.php";
 $user = []; // Для данных пользователя
 $errors = []; // Для ошибок
 /* Валидация */
 /* Проверка отправки данных из формы */
-if($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $user = $_POST;
 
     /* Проверка на заполнение обязательных полей */
@@ -30,39 +30,34 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     $res_user = get_query_row($connect, $sql_email);
     
     /* Проверка выполнения запроса e-mail */
-    if($res_user) {
+    if ($res_user) {
         $pass = $res_user["user_password"];
         
         /* Сверка паролей */
-        if(password_verify($pswrd, $pass)) {
-        /* Старт новой сессии и редирект в случае успеха сверки паролей*/
+        if (password_verify($pswrd, $pass)) {
+            /* Старт новой сессии и редирект в случае успеха сверки паролей*/
             session_start();
             $_SESSION["user"] = $res_user["user_name"];
             $_SESSION["email"] = $res_user["email"];
             $_SESSION["ID"] = $res_user["user_id"];
             header("Location: /index.php");
-        } 
-        /* Запись ошибки, если пароль неверный */
-        else {
+        } else {
+            /* Запись ошибки, если пароль неверный */
             $errors["password"] = "Пароль неверный!";
         }
        
-      /* Запись ошибки, если e-mail корректен, но не найден в БД */      
-    } 
-    elseif(filter_var($email, FILTER_VALIDATE_EMAIL) && ($email != "")) {
+        /* Запись ошибки, если e-mail корректен, но не найден в БД */
+    } elseif (filter_var($email, FILTER_VALIDATE_EMAIL) && ($email != "")) {
         $errors["email"] = "E-mail не найден";
     }
 
     /* Проверка на наличие ошибок */
-    if(count($errors)) {
+    if (count($errors)) {
         $page_content = include_template($page, ["user" => $user, "errors" => $errors]);
     }
-
 }
 
 /* Подключает шаблоны страниц на основе результатов запросов в БД */
 $page_content = include_template($page, ["user" => $user, "errors" => $errors]);
 
 print($page_content);
-
-?>

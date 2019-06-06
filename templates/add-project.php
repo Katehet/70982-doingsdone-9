@@ -8,7 +8,7 @@
 
     <input class="form__input <?=$err_name; ?>" type="text" name="name" id="project_name" value="" placeholder="Введите название проекта">
     <!-- Сообщение в случае ошибки-->
-    <?php if(isset($errors["name"])): ?>
+    <?php if (isset($errors["name"])): ?>
     <p class="form__message"><?=$errors["name"]; ?></p>
     <?php endif; ?>
     </div>

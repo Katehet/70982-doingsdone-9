@@ -39,7 +39,7 @@
 
           <?php $err_email = isset($errors["email"]) ? "form__input--error" : ""; ?>
           <?php $err_pswrd = isset($errors["password"]) ? "form__input--error" : ""; ?>
-          <?php if($errors): ?>
+          <?php if ($errors): ?>
             <p class="error-message">Вероятно, Вы где-то ошиблись...</p>
           <?php endif; ?>
 
@@ -49,7 +49,7 @@
 
             <input class="form__input <?=$err_email; ?>" type="text" name="email" id="email" value="<?=$var; ?>" placeholder="Введите e-mail">
             <!-- Сообщение в случае  ошибки -->
-            <?php if(isset($errors["email"])): ?>
+            <?php if (isset($errors["email"])): ?>
             <p class="form__message"><?=$errors["email"]; ?></p>
             <?php endif; ?>
           </div>
@@ -59,7 +59,7 @@
 
             <input class="form__input <?=$err_pswrd; ?>" type="password" name="password" id="password" value="" placeholder="Введите пароль">
             <!-- Сообщение в случае  ошибки -->
-            <?php if(isset($errors["password"])): ?>
+            <?php if (isset($errors["password"])): ?>
             <p class="form__message"><?=$errors["password"]; ?></p>
             <?php endif; ?>
           </div>
