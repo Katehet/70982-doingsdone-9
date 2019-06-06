@@ -1,10 +1,15 @@
 <?php
+ini_set('error_reporting', E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
 
 require_once("connection.php");
 require_once("functions.php");
 require_once("helpers.php");
 
 $page = "register.php";
+$new_user = [];
+$errors = [];
 /* Валидация */
 /* Проверка отправки данных из формы */
 if($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -14,7 +19,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     $required = ["email", "password", "name"];
 
     /* Массив для хранения ошибок */
-    $errors = fill_this_fields($new_user, $required);
+    $errors = fill_this_fields($new_user, $required, $errors);
 
     /* Данные от пользователя */
     $email = $new_user["email"];

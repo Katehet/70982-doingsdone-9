@@ -1,4 +1,7 @@
 <?php
+ini_set('error_reporting', E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
 
 require_once("vendor/autoload.php");
 
@@ -36,8 +39,8 @@ if(isset($_GET["tab"])) {
 */
 /* По запросу  и переданному id обновляет статус задачи */
 if(isset($_GET["check"])) {
-    $checked = $_GET["check"];
-    $task_id = $_GET["task_id"];
+    $checked = intval($_GET["check"]);
+    $task_id = intval($_GET["task_id"]);
     $update_status = "UPDATE tasks SET task_status = '$checked' WHERE task_id = '$task_id'";
     
     $result = mysqli_query($connect, $update_status);
@@ -52,6 +55,7 @@ if(isset($_GET["check"])) {
 выводить на главной задачи из проекта
 */
 /* Проверяет параметр запроса в ссылке элемента списка проектов */
+$project_id = 0;
 if(isset($_GET["project_id"])) {
     $project_id = intval($_GET["project_id"]);
 

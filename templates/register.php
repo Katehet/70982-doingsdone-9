@@ -38,12 +38,12 @@
           <form class="form" action="register.php" method="post" autocomplete="off">
 
             <?php $classname = "form__input--error"; ?>
-            <?php if(isset($errors)): ?>
+            <?php if(count($errors)): ?>
               <p class="error-message">Пожалуйста, исправьте ошибки в форме</p>
             <?php endif; ?>
 
             <div class="form__row">
-            <?php $var = (isset($errors)) ? $new_user["email"] : "";?>
+            <?php $var = (count($errors) && isset($new_user["email"])) ? $new_user["email"] : "";?>
               <label class="form__label" for="email">E-mail <sup>*</sup></label>
 
               <input class="form__input <?=isset($errors["email"]) ? $classname : ""; ?>" type="text" name="email" id="email" value="<?=$var; ?>" placeholder="Введите e-mail">
@@ -66,7 +66,7 @@
             <div class="form__row">
               <label class="form__label" for="name">Имя <sup>*</sup></label>
 
-              <input class="form__input <?=isset($errors["name"]) ? $classname : ""; ?>" type="text" name="name" id="name" value="<?=$new_user["name"]; ?>" placeholder="Введите имя">
+              <input class="form__input <?=isset($errors["name"]) ? $classname : ""; ?>" type="text" name="name" id="name" value="<?=$new_user["name"] ?? ""; ?>" placeholder="Введите имя">
             <!-- Сообщение в случае  ошибки -->
             <?php if(isset($errors["name"])): ?>
             <p class="form__message">Имя не введено</p>

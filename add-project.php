@@ -1,4 +1,7 @@
 <?php
+ini_set('error_reporting', E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
 
 session_start();
 if(isset($_SESSION["user"])) {
@@ -11,10 +14,10 @@ if(isset($_SESSION["user"])) {
 
     $page = "add-project.php";
     $user_name = $_SESSION["user"];
+    $errors = [];
 
     if($_SERVER["REQUEST_METHOD"] == "POST") {
         $new_project = $_POST;
-        $errors = [];
 
         /* Валидация */
         /* Проверка на пустое поле */

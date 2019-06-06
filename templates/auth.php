@@ -44,7 +44,7 @@
           <?php endif; ?>
 
           <div class="form__row">
-          <?php $var = (isset($errors)) ? $user["email"] : "";?>
+          <?php $var = (count($errors) && isset($user["email"])) ? $user["email"] : "";?>
             <label class="form__label" for="email">E-mail <sup>*</sup></label>
 
             <input class="form__input <?=$err_email; ?>" type="text" name="email" id="email" value="<?=$var; ?>" placeholder="Введите e-mail">

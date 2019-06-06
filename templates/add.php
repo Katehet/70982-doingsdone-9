@@ -9,16 +9,16 @@
 
         <input class="form__input <?=$classname; ?>" type="text" name="name" id="name" value="<?=$value; ?>" placeholder="Введите название">
         <!-- Текст ошибки -->
-        <?php if(isset($errors)): ?>
+        <?php if(count($errors)): ?>
             <p class="form__message">
-            <?=$errors["name"]; ?>
+            <?=$errors["name"] ?? ""; ?>
             </p>
         <?php endif; ?>
     </div>
 
     <div class="form__row">
         <?php $classname = isset($errors["project"]) ? "form__input--error" : ""; ?>
-        <?php $ID = isset($errors) ? $new_task["project"] : ""; ?>
+        <?php $ID = count($errors) && isset($new_task["project"]) ? $new_task["project"] : ""; ?>
 
         <label class="form__label" for="project">Проект <sup>*</sup></label>
 
@@ -29,9 +29,9 @@
             <?php endforeach; ?>
         </select>
         <!-- Текст ошибки -->
-        <?php if(isset($errors)): ?>
+        <?php if(count($errors)): ?>
             <p class="form__message">
-            <?=$errors["project"]; ?>
+            <?=$errors["project"] ?? ""; ?>
             </p>
         <?php endif; ?>
     </div>
