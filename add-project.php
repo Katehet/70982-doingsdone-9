@@ -24,7 +24,7 @@ if (isset($_SESSION["user"])) {
             $errors["name"] = "Введите название проекта";
         }
 
-        $name = $new_project["name"];
+        $name = strip_tags($new_project["name"]);
         /* Запрашивает наличие проекта с введенным именем для данного пользователя*/
         $sql_project = "SELECT p.project_id, p.project_name FROM projects p
                         JOIN users u

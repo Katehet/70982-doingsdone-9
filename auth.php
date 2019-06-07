@@ -19,11 +19,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $required = ["email", "password"];
     
     /* Массив для хранения ошибок */
-    $errors = fill_this_fields($user, $required, $errors);
+    $errors = fill_this_fields($user, $required);
 
     /* Данные от пользователя */
-    $email = $user["email"];
-    $pswrd =$user["password"];
+    $email = mysqli_real_escape_string($connect, $user['email']);
+    $pswrd = htmlspecialchars($user["password"]);
 
     /* Поиск записей в БД по введённому e-mail  */
     $sql_email = "SELECT email, user_password, user_name, user_id FROM users WHERE email = '$email'";

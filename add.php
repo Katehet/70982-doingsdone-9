@@ -38,9 +38,9 @@ if (isset($_SESSION["user"])) {
             $diff = floor(($today - $task_day) / 86400);
 
             if (!is_date_valid($new_task["date"])) {
-                $errors["date_format"] = "Введите дату в формате ГГГГ-ММ-ДД";
+                $errors["date"] = "Введите дату в формате ГГГГ-ММ-ДД";
             } elseif ($diff > 0) {
-                $errors["date_exp"] = "Вы не можете спланировать прошлое :)";
+                $errors["date"] = "Вы не можете спланировать прошлое :)";
             }
         } else {
             $new_task["date"] = null;

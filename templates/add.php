@@ -37,19 +37,15 @@
     </div>
 
     <div class="form__row">
+        <?php $classname = isset($errors["date"]) ? "form__input--error" : ""; ?>
         <label class="form__label" for="date">Дата выполнения</label>
-        <?php $new_date = isset($new_task["date"]) ? $new_task["date"] : ""; ?>
-        <input class="form__input form__input--date" type="text" name="date" id="date" value="<?=$new_date; ?>"
+        <?php $new_date = $new_task["date"] ?? ""; ?>
+        <input class="form__input form__input--date <?=$classname; ?>" type="text" name="date" id="date" value="<?=$new_date; ?>"
             placeholder="Введите дату в формате ГГГГ-ММ-ДД">
         <!-- Текст ошибки -->
-        <?php if (isset($errors["date_format"])): ?>
+        <?php if (isset($errors["date"])): ?>
         <p class="form__message">
-            <?=$errors["date_format"]; ?>
-        </p>
-        <?php endif; ?>
-        <?php if (isset($errors["date_exp"])): ?>
-        <p class="form__message">
-            <?=$errors["date_exp"]; ?>
+            <?=$errors["date"]; ?>
         </p>
         <?php endif; ?>
     </div>

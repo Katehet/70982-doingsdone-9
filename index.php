@@ -18,7 +18,7 @@ if (isset($_SESSION["user"])) {
     */
     /* По запросу формирует соответствующий список задач */
     if (isset($_GET["tab"])) {
-        $tab = $_GET["tab"];
+        $tab = strip_tags($_GET["tab"]);
         switch ($tab) {
         case "today":
             $tab = " = CURRENT_DATE";
@@ -29,6 +29,8 @@ if (isset($_SESSION["user"])) {
         case "expired":
             $tab = " < CURRENT_DATE";
             break;
+        default:
+            $tab = "";
         }
         $query_tasks .= " AND t.task_timeout" . "$tab";
     }
@@ -37,10 +39,10 @@ if (isset($_SESSION["user"])) {
     Отмечать задачи как выполненные
     */
     /* По запросу  и переданному id обновляет статус задачи */
-    if (isset($_GET["check"])) {
+    if (isset($_GET["check"]) && isset($_GET["task_id"])) {
         $checked = intval($_GET["check"]);
         $task_id = intval($_GET["task_id"]);
-        $update_status = "UPDATE tasks SET task_status = '$checked' WHERE task_id = '$task_id'";
+        $update_status = "UPDATE tasks SET task_status = '$checked' WHERE task_id = '$task_id' AND user_id = '$user_id'";
     
         $result = mysqli_query($connect, $update_status);
         if (!$result) {
@@ -59,7 +61,7 @@ if (isset($_SESSION["user"])) {
         $project_id = intval($_GET["project_id"]);
 
         /* Создает список проектов с id из запроса, созданных пользователем */
-        $id_pojects_list = "SELECT project_id FROM projects WHERE user_id = $user_id AND project_id = '$project_id'";
+        $id_pojects_list = "SELECT project_id FROM projects WHERE user_id = '$user_id' AND project_id = '$project_id'";
         $id_list = get_query_result($connect, $id_pojects_list);
 
         /* Проверяет полученный массив */
@@ -80,7 +82,7 @@ if (isset($_SESSION["user"])) {
     */
     /* Выполняет поиск задачи по названию */
     $search = $_GET["search"] ?? "";
-
+    $search_message = "";
     if ($search) {
         $search = trim($search);
         $sql = $query_tasks . " AND MATCH(task_name) AGAINST(?)";
@@ -90,10 +92,13 @@ if (isset($_SESSION["user"])) {
         $res = mysqli_stmt_get_result($stmt);
 
         $tasks = mysqli_fetch_all($res, MYSQLI_ASSOC);
+        if (!$tasks) {
+            $search_message = "Ничего не найдено";
+        }
     };
 
     /* Подключает шаблоны страниц на основе результатов запросов в БД */
-    $page_content = include_template($page, ["projects" => $projects, "tasks" => $tasks, "show_complete_tasks" => $show_complete_tasks]);
+    $page_content = include_template($page, ["projects" => $projects, "tasks" => $tasks, "show_complete_tasks" => $show_complete_tasks, "search_message" => $search_message]);
     $layout_content = include_template("layout.php", ["main_content" => $page_content, "title" => $title, "user_name" => $user_name, "project_id" => $project_id, "projects" => $projects, "tasks" => $all_tasks]);
     print($layout_content);
 } else {

@@ -87,9 +87,9 @@ function time_is_up(array $value)
  *                           полей
  * @return array $errors Ассоциативный массив с текстом ошибок заполнения
  */
-function fill_this_fields(array $input_data, array $fields, $errors)
+function fill_this_fields(array $input_data, array $fields)
 {
-
+    $errors = [];
     /* Проверка заполнения обязательных полей */
     foreach ($fields as $field) {
         if (empty($input_data[$field])) {

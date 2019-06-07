@@ -30,7 +30,7 @@ $url = "/" . $page . "?" . $query;
 </div>
 
 <table class="tasks">
-
+<?php if ($tasks): ?>
 <?php foreach ($tasks as $key => $value): ?>
     <?php if (!(!$show_complete_tasks && $value["task_status"])): ?>
 
@@ -38,7 +38,7 @@ $url = "/" . $page . "?" . $query;
         <td class="task__select">
             <label class="checkbox task__checkbox">
                 <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="<?=$value["task_id"]; ?>" <?=$value["task_status"] ? "checked" : ""; ?>>
-                <span class="checkbox__text"><?=htmlspecialchars($value["task_name"]); ?></span>
+                <span class="checkbox__text"><?=strip_tags($value["task_name"]); ?></span>
             </label>
         </td>
 
@@ -49,5 +49,10 @@ $url = "/" . $page . "?" . $query;
     <?php endif; ?>
 
 <?php endforeach; ?>
+<?php else: ?>
+    <div>
+        <p><?=$search_message; ?></p>
+    </div>
+<?php endif; ?>
 
 </table>
