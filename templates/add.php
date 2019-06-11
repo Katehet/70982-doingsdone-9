@@ -24,9 +24,11 @@
 
         <select class="form__input form__input--select <?=$classname; ?>" name="project" id="project">
             <option value="">Выберите проект</option>
+            <?php if (isset($projects)): ?>
             <?php foreach ($projects as $key => $val): ?>
             <option value="<?=htmlspecialchars($val["project_id"]); ?>" <?=($val["project_id"] === $ID) ? "selected" : "";?> ><?=htmlspecialchars($val["project_name"]); ?></option>
             <?php endforeach; ?>
+            <?php endif; ?>
         </select>
         <!-- Текст ошибки -->
         <?php if (count($errors)): ?>

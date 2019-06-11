@@ -72,7 +72,7 @@ function time_is_up(array $value)
     $task_date = strtotime($value["task_timeout"]);
     $diff_in_hours = floor(($task_date - $date_now) / 3600);
 
-    if ($diff_in_hours < 24 && $task_date != "" && !$value["status"]) {
+    if ($diff_in_hours < 24 && $task_date != "" && !isset($value["status"])) {
         return true;
     }
     return false;

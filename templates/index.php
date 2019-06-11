@@ -15,10 +15,10 @@ $query = http_build_query($params);
 $url = "/" . $page . "?" . $query;
 ?>
     <nav class="tasks-switch">
-        <a href="index.php" class="tasks-switch__item <?=!($_GET["tab"]) ? "tasks-switch__item--active" : "" ; ?>">Все задачи</a>
-        <a href="<?=$url . "&tab=today"; ?>" class="tasks-switch__item <?=($_GET["tab"] === "today") ? "tasks-switch__item--active" : "" ; ?>">Повестка дня</a>
-        <a href="<?=$url . "&tab=tomorrow"; ?>" class="tasks-switch__item <?=($_GET["tab"] === "tomorrow") ? "tasks-switch__item--active" : "" ; ?>">Завтра</a>
-        <a href="<?=$url . "&tab=expired"; ?>" class="tasks-switch__item <?=($_GET["tab"] === "expired") ? "tasks-switch__item--active" : "" ; ?>">Просроченные</a>
+        <a href="index.php" class="tasks-switch__item <?=!isset($_GET["tab"]) ? "tasks-switch__item--active" : "" ; ?>">Все задачи</a>
+        <a href="<?=$url . "&tab=today"; ?>" class="tasks-switch__item <?=(isset($_GET["tab"]) && $_GET["tab"] === "today") ? "tasks-switch__item--active" : "" ; ?>">Повестка дня</a>
+        <a href="<?=$url . "&tab=tomorrow"; ?>" class="tasks-switch__item <?=(isset($_GET["tab"]) && $_GET["tab"] === "tomorrow") ? "tasks-switch__item--active" : "" ; ?>">Завтра</a>
+        <a href="<?=$url . "&tab=expired"; ?>" class="tasks-switch__item <?=(isset($_GET["tab"]) && $_GET["tab"] === "expired") ? "tasks-switch__item--active" : "" ; ?>">Просроченные</a>
     </nav>
 
     <label class="checkbox">
